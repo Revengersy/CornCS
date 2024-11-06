@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5dc; /* 옅은 베이지 색 */
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .pager-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sender-id {
+            width: 260px;
+            height: 40px;
+            background-color: #222;
+            color: rgb(228, 226, 216);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .pager-screen {
+            display: grid;
+            grid-template-columns: repeat(6, 40px);
+            gap: 4px;
+            background-color: black;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .segment {
+            width: 40px;
+            height: 60px;
+            background-color: #222;
+            border-radius: 3px;
+            opacity: 0.3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            color: rgb(228, 226, 216);
+        }
+
+        .input-field {
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            padding: 8px;
+            font-size: 16px;
+            width: 220px;
+            margin-bottom: 10px;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #0f0;
+        }
+
+        .receiver-select {
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            padding: 8px;
+            font-size: 16px;
+            width: 240px;
+            margin-bottom: 20px;
+        }
+
+        .receiver-select:focus {
+            outline: none;
+            border-color: #0f0;
+        }
+    </style>
+    <title>Pixel Pager Display</title>
+</head>
+<body>
+    <div class="pager-container">
+        <div class="sender-id">
+            Sender ID: [Future ID Here]
+        </div>
+        <div class="pager-screen">
+            <div class="segment" id="seg1"></div>
+            <div class="segment" id="seg2"></div>
+            <div class="segment" id="seg3"></div>
+            <div class="segment" id="seg4"></div>
+            <div class="segment" id="seg5"></div>
+            <div class="segment" id="seg6"></div>
+        </div>
+        <select class="receiver-select">
+            <option value="" disabled selected>Select Receiver ID</option>
+            <option value="1">Receiver ID 1</option>
+            <option value="2">Receiver ID 2</option>
+            <option value="3">Receiver ID 3</option>
+            <option value="4">Receiver ID 4</option>
+            <option value="5">Receiver ID 5</option>
+            <option value="6">Receiver ID 6</option>
+            <option value="7">Receiver ID 7</option>
+            <option value="8">Receiver ID 8</option>
+        </select>
+        <input type="text" class="input-field" maxlength="6" placeholder="Type your message here..." oninput="updateScreen(this.value)"/>
+    </div>
+
+    <script>
+        function updateScreen(value) {
+            const maxSegments = 6;
+            for (let i = 0; i < maxSegments; i++) {
+                const segment = document.getElementById(`seg${i + 1}`);
+                segment.textContent = value[i] || ''; // Set text or empty if undefined
+            }
+        }
+    </script>
+</body>
+</html>
