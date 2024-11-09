@@ -86,7 +86,7 @@ export async function renderComments() {
     let msg = row['msg'];
     let sender_id = row['sender_id'];
     // str += `전송자 아이디: <span>${sender_id}</span> <br> 메시지: <span>${msg}</span><br><br>`;
-
+    msg = padMessage(msg);
     str += `        
     <span>발신인: ${sender_id}</span>
     <div class="pager-screen">        
@@ -115,3 +115,15 @@ export async function renderComments() {
 $(document).ready(function () {
   checkMsgPossibility(); // Check and set message button enabled/disabled
 });
+
+function padMessage(msg) {
+  // Check if the length of the message is less than 6
+  if (msg.length < 6) {
+      // Calculate the number of spaces needed
+      let spacesNeeded = 6 - msg.length;
+      // Add spaces to the end of the message
+      msg += ' '.repeat(spacesNeeded);
+  }
+  // Return the padded message
+  return msg;
+};
