@@ -6,8 +6,6 @@
 A세계선은 B에게만,
 B세계선은 A에게만 전송된다.
 
-
-
 -->
 
 <head>
@@ -19,13 +17,29 @@ B세계선은 A에게만 전송된다.
     <script type="module" src="./main.js"></script>
     <link rel="stylesheet" href="styles.css">
 
-    <title>Pixel Pager Display</title>
+    <script type="module">
+        import { setCurrentId, renderComments } from './main.js';
+
+        $(document).ready(async function () {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const current_id = urlParams.get('id');
+
+            if (current_id) {
+                setCurrentId(current_id); // Set current_id in main.js using the imported function
+                console.log("Current ID from URL:", current_id);
+                await renderComments(); // Call renderComments after setting the current_id
+            } else {
+                console.error("No current_id found in URL.");
+            }
+        });
+    </script>
 </head>
 
 <body>
     <div class="pager-container">
         <div class="sender-id common-display">
-            Sender ID: [Future ID Here]
+            전송 단말 화면
         </div>
         <div class="pager-screen">
             <div class="segment common-display" id="seg1"></div>
@@ -36,22 +50,18 @@ B세계선은 A에게만 전송된다.
             <div class="segment common-display" id="seg6"></div>
         </div>
         <select class="receiver-select common-input" id="receiver_id">
-            <option value="" disabled selected>Select Receiver ID</option>
-            <option value="1">Receiver ID 1</option>
-            <option value="2">Receiver ID 2</option>
-            <option value="3">Receiver ID 3</option>
-            <option value="4">Receiver ID 4</option>
-            <option value="5">Receiver ID 5</option>
-            <option value="6">Receiver ID 6</option>
-            <option value="7">Receiver ID 7</option>
-            <option value="8">Receiver ID 8</option>
+            <option value="" disabled selected>수신자 ID를 선택해주세요</option>
+            <option value="admin">수신자 ID admin</option>
+            <option value="APS">수신자 ID PS</option>
+            <option value="AKH">수신자 ID KH</option>
+            <option value="ASR">수신자 ID SR</option>
         </select>
         <div class="input-container">
-            <input type="text" class="input-field common-input" maxlength="6" placeholder="Type your message here..."
+            <input type="text" class="input-field common-input" maxlength="6" placeholder="메세지를 입력하세요..."
                 oninput="updateScreen(this.value)" id="sending_msg" />
             <button class="send-button" id="sending_btn">Send</button>
         </div>
-        <div class = "received_msg" id="received_msg">
+        <div class="received_msg" id="received_msg">
         </div>
     </div>
 
