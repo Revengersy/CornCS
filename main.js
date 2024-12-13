@@ -65,6 +65,13 @@ $("#sending_btn").click(async function (event) {
 
 // Load comments function
 
+function scrollToBottom() {
+    const receivedMsgDiv = document.getElementById("received_msg");
+    receivedMsgDiv.scrollTop = receivedMsgDiv.scrollHeight;
+}
+
+
+
 export async function renderComments() {
   if (!current_id) {
     console.error("current_id is not set!");
@@ -103,9 +110,12 @@ export async function renderComments() {
 
     counter += 1;
 
+    
+
   });
 
   $("#received_msg").html(str);
+  scrollToBottom();  // 메시지가 추가되면 자동으로 스크롤
 
 
 
